@@ -1,18 +1,16 @@
 import time
 
+import allure
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class Checkout_page(Base):
-
-    def __init__(self, driver_g):
-        super().__init__(driver_g)
-        self.driver_g = driver_g
 
     # Locators
 
@@ -126,36 +124,39 @@ class Checkout_page(Base):
     # Methods
 
     def input_checkout_information(self):
-        self.get_current_url()
-        time.sleep(1)
-        self.user_city_name_clear()
-        time.sleep(1)
-        self.user_city_name_checkout('Москва')
-        time.sleep(2)
-        self.user_drop_down_city_name()
-        time.sleep(2)
-        self.user_post_office_checkout()
-        time.sleep(1)
-        self.user_bank_card_checkout()
-        time.sleep(1)
-        self.user_buyer_name_clear()
-        self.user_buyer_name_checkout('Иванов Иван Иванович')
-        time.sleep(1)
-        self.user_buyer_email_clear()
-        self.user_buyer_email_checkout('proverka@mail.ru')
-        time.sleep(1)
-        self.user_buyer_phone_checkout_click()
-        self.user_buyer_phone_checkout('92137647')
-        time.sleep(1)
-        self.user_buyer_adress_checkout('Археологическая улица 3, дом 2, кв 666')
-        time.sleep(1)
-        self.user_buyer_zip_checkout('192666')
-        time.sleep(1)
-        self.user_approve_check_checkout()
-        time.sleep(1)
-        self.user_buyer_commentary_checkout('Позвонить заранее, так как внизу злые бабки могут отобрать мои настолочки')
-        time.sleep(1)
-        self.user_checkout_button_checkout()
+        with allure.step("Input checkout information"):
+            Logger.add_start_step(method='input_checkout_information')
+            self.get_current_url()
+            time.sleep(1)
+            self.user_city_name_clear()
+            time.sleep(1)
+            self.user_city_name_checkout('Москва')
+            time.sleep(2)
+            self.user_drop_down_city_name()
+            time.sleep(3)
+            self.user_post_office_checkout()
+            time.sleep(1)
+            self.user_bank_card_checkout()
+            time.sleep(1)
+            self.user_buyer_name_clear()
+            self.user_buyer_name_checkout('Иванов Иван Иванович')
+            time.sleep(1)
+            self.user_buyer_email_clear()
+            self.user_buyer_email_checkout('proverka@mail.ru')
+            time.sleep(1)
+            self.user_buyer_phone_checkout_click()
+            self.user_buyer_phone_checkout('92137647')
+            time.sleep(1)
+            self.user_buyer_adress_checkout('Археологическая улица 3, дом 2, кв 666')
+            time.sleep(1)
+            self.user_buyer_zip_checkout('192666')
+            time.sleep(1)
+            self.user_approve_check_checkout()
+            time.sleep(1)
+            self.user_buyer_commentary_checkout('Позвонить заранее, так как внизу злые бабки могут отобрать мои настолочки')
+            time.sleep(1)
+            self.user_checkout_button_checkout()
+            Logger.add_end_step(url=self.driver_g.current_url, method='input_checkout_information')
 
 
 

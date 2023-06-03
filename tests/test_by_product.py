@@ -1,5 +1,5 @@
 import time
-
+import allure
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import Service
@@ -13,6 +13,8 @@ from pages.end_page import End_page
 from pages.login_page import Login_page
 from pages.main_page import Main_page
 
+
+@allure.description("Test_buy product")
 def test_buy_product(set_up):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)

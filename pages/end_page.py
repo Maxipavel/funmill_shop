@@ -1,18 +1,16 @@
 import time
 
+import allure
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class End_page(Base):
-
-    def __init__(self, driver_g):
-        super().__init__(driver_g)
-        self.driver_g = driver_g
 
     # Locators
 
@@ -39,13 +37,18 @@ class End_page(Base):
     # Methods
 
     def scroll_down(self):
-        self.scroll_down_page()
+        with allure.step("Scroll down"):
+            Logger.add_start_step(method='scroll_down')
+            self.scroll_down_page()
+            Logger.add_end_step(url=self.driver_g.current_url, method='scroll_down')
 
     def screen(self):
+        Logger.add_start_step(method='screen')
         self.get_current_url()
         time.sleep(3)
         self.pop_up()
         self.screenshot()
+        Logger.add_end_step(url=self.driver_g.current_url, method='screen')
 
 
 

@@ -4,14 +4,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from base.base_class import Base
-
+from utilities.logger import Logger
+import allure
 
 class Login_page(Base):
 
     url = 'https://funmill.ru/personal/'
-    def __init__(self, driver_g):
-        super().__init__(driver_g)
-        self.driver_g = driver_g
 
     # Locators
 
@@ -51,12 +49,14 @@ class Login_page(Base):
     # Methods
 
     def authorization(self):
-        self.driver_g.get(self.url)
-        self.driver_g.maximize_window()
-        self.get_current_url()
-        self.input_user_name('maxipavel@gmail.com')
-        self.input_password('1234ASDgf')
-        self.click_login_button()
-        self.assert_word(self.get_main_word(), 'Личный кабинет')
-
+        with allure.step("Аuthorization"):
+            Logger.add_start_step(method='authorization')
+            self.driver_g.get(self.url)
+            self.driver_g.maximize_window()
+            self.get_current_url()
+            self.input_user_name('maxipavel@gmail.com')
+            self.input_password('1234ASDgf')
+            self.click_login_button()
+            self.assert_word(self.get_main_word(), 'Личный кабинет')
+            Logger.add_end_step(url=self.driver_g.current_url, method='authorization')
 

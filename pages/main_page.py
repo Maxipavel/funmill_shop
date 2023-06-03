@@ -1,18 +1,16 @@
 import time
 
+import allure
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class Main_page(Base):
-
-    def __init__(self, driver_g):
-        super().__init__(driver_g)
-        self.driver_g = driver_g
 
     # Locators
 
@@ -66,20 +64,25 @@ class Main_page(Base):
     # Methods
 
     def select_product(self):
-        self.get_current_url()
-        self.click_category_family()
-        time.sleep(1)
-        self.click_games_atlantis()
-        time.sleep(1)
-        self.click_games_pachwork()
-        time.sleep(1)
-        self.click_games_project_l()
-        time.sleep(1)
-        self.click_cart()
+        with allure.step("Select product"):
+            Logger.add_start_step(method='select_product')
+            self.get_current_url()
+            self.click_category_family()
+            time.sleep(1)
+            self.click_games_atlantis()
+            time.sleep(1)
+            self.click_games_pachwork()
+            time.sleep(1)
+            self.click_games_project_l()
+            time.sleep(1)
+            self.click_cart()
+            Logger.add_end_step(url=self.driver_g.current_url, method='select_product')
 
     def select_cart_for_clear(self):
+        Logger.add_start_step(method='select_cart_for_clear')
         self.get_current_url()
         self.click_cart()
+        Logger.add_end_step(url=self.driver_g.current_url, method='select_cart_for_clear')
 
 
 
